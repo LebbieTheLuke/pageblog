@@ -1,1 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Secret Communication Methods</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #e6f7ff;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+        h1 {
+            color: #333;
+        }
+        .container {
+            display: flex;
+            flex-direction: column; /* Change to column for scrolling */
+            align-items: center;
+            width: 100%;
+            margin-top: 20px;
+        }
+        .converter-container {
+            background-color: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+            width: 90%;
+            max-width: 800px; /* Adjust width */
+        }
+        input, button, textarea {
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 4px;
+            border: 1px solid #ccc;
+            width: 100%; /* Adjust input width */
+        }
+        button {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            text-transform: uppercase;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        textarea {
+            height: 100px;
+        }
+    </style>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.0.0/crypto-js.min.js"></script>
+    <script>
+        function textToBinary() {
+            var inputText = document.getElementById('textInput').value;
+            var binary = '';
+            for (var i = 0; i < inputText.length; i++) {
+                binary += inputText[i].charCodeAt(0).toString(2) + ' ';
+            }
+            document.getElementById('binaryOutput').value = binary.trim();
+        }
 
+        function binaryToText() {
+            var inputBinary = document.getElementById('binaryInput').value;
+            var text = '';
+            var binaryArray = inputBinary.split(' ');
+            for (var i = 0; i < binaryArray.length; i++) {
+                text += String.fromCharCode(parseInt(binaryArray[i], 2));
+            }
+            document.getElementById('textOutput').value = text;
+        }
+
+        function encryptText() {
+            var inputText = document.getElementById('textToEncrypt').value;
+            var key = document.getElementById('encryptionKey').value;
+            var encrypted = CryptoJS.AES.encrypt(inputText, key);
+            document.getElementById('encryptedOutput').value = encrypted.toString();
+        }
+
+        function decryptText() {
+            var encryptedText = document.getElementById('encryptedText').value;
+            var key = document.getElementById('decryptionKey').value;
+            var decrypted = CryptoJS.AES.decrypt(encryptedText, key);
+            var decryptedText = decrypted.toString(CryptoJS.enc.Utf8);
+            document.getElementById('decryptedOutput').value = decryptedText;
+        }
+
+        function copyToClipboard(elementId) {
+            var copyText = document.getElementById(elementId);
+            copyText.select();
+            document.execCommand("copy");
+        }
+
+        function encryptFile() {
+            var fileInput = document.getElementById('fileInput');
+            var password = document.getElementById('encryptionKeyFile').value;
+            var file = fileInput.files[0];
+            var reader = new FileReader();
+            reader.onload = function(e) {
+                var encrypted = CryptoJS.AES.encrypt(e.target.result, password);
+                var element = document.createElement('a');
+                element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(encrypted.toString()));
+                element.setAttribute('download', file.name + '.encrypted');
+                document.body.appendChild(element);
+                element.click();
+                document.body.removeChild(element);
+            };
+
+            reader.readAsText(file);
+        }
+
+        function decryptFile() {
+            var fileInput = document.getElementById('fileInputDecrypt');
+            var password = document.getElementById('decryptionKeyFile').value;
+            var file = fileInput.files[0];
+            var reader = new FileReader();
+            reader.onload = function(e) {
+                var decrypted = CryptoJS.AES.decrypt(e.target.result, password);
+                var decryptedText = decrypted.toString(CryptoJS.enc.Utf8);
+                var element = document.createElement('a');
+                element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(decryptedText));
+                element.setAttribute('download', file.name.replace('.encrypted', ''));
+                document.body.appendChild(element);
+                element.click();
+                document.body.removeChild(element);
+            };
+            reader.readAsText(file);
+        }
+    </script>
+</head>
+<body>
+    <h1>Secret Communication Methods</h1>
+    <div class="container">
+        <!-- Text to Binary Converter -->
+        <div class="converter-container">
+            <h2>Text to Binary</h2>
+            <input type="text" id="textInput" placeholder="Enter text here...">
+            <button onclick="textToBinary()">Convert to Binary</button>
+            <div>
+                <input type="text" id="binaryOutput" readonly placeholder="Binary output appears here...">
+                <button onclick="copyToClipboard('binaryOutput')">Copy</button>
+            </div>
+        </div>
+        <!-- Binary to Text Converter -->
+        <div class="converter-container">
+            <h2>Binary to Text</h2>
+            <input type="text" id="binaryInput" placeholder="Enter binary here...">
+            <button onclick="binaryToText()">Convert to Text</button>
+            <div>
+                <input type="text" id="textOutput" readonly placeholder="Text output appears here...">
+                <button onclick="copyToClipboard('textOutput')">Copy</button>
+            </div>
+        </div>
+        <!-- Encrypt Text -->
+        <div class="converter-container">
+            <h2>Encrypt Text</h2>
+            <input type="text" id="textToEncrypt" placeholder="Enter text to encrypt...">
+            <input type="password" id="encryptionKey" placeholder="Enter a key...">
+            <button onclick="encryptText()">Encrypt</button>
+            <div>
+                <textarea id="encryptedOutput" readonly placeholder="Encrypted text appears here..."></textarea>
+                <button onclick="copyToClipboard('encryptedOutput')">Copy</button>
+            </div>
+        </div>
+        <!-- Decrypt Text -->
+        <div class="converter-container">
+            <h2>Decrypt Text</h2>
+            <input type="text" id="encryptedText" placeholder="Paste encrypted text here...">
+            <input type="password" id="decryptionKey" placeholder="Enter the key...">
+            <button onclick="decryptText()">Decrypt</button>
+            <div>
+                <textarea id="decryptedOutput" readonly placeholder="Decrypted text appears here..."></textarea>
+                <button onclick="copyToClipboard('decryptedOutput')">Copy</button>
+            </div>
+        </div>
+        <!-- Encrypt a File -->
+        <div class="converter-container">
+            <h2>Encrypt a File</h2>
+            <input type="file" id="fileInput">
+            <input type="password" id="encryptionKeyFile" placeholder="Enter a password...">
+            <button onclick="encryptFile()">Encrypt and Download</button>
+        </div>
+        <!-- Decrypt a File -->
+        <div class="converter-container">
+            <h2>Decrypt a File</h2>
+            <input type="file" id="fileInputDecrypt">
+            <input type="password" id="decryptionKeyFile" placeholder="Enter the password...">
+            <button onclick="decryptFile()">Decrypt and Download</button>
+        </div>
+    </div>
+</body>
+</html>
