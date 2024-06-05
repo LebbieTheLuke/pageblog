@@ -29,12 +29,25 @@
             margin: 10px 0;
             font-size: 18px;
         }
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
     </style>
 </head>
 <body>
     <div id="location-info">
         <h1>Your Location</h1>
         <p id="coords"></p>
+        <button onclick="openGoogleMaps()">View on Google Maps</button>
     </div>
 
     <script>
@@ -52,6 +65,16 @@
 
             var coordsElement = document.getElementById("coords");
             coordsElement.textContent = "Latitude: " + latitude.toFixed(6) + ", Longitude: " + longitude.toFixed(6);
+        }
+
+        function openGoogleMaps() {
+            var coordsElement = document.getElementById("coords");
+            var coordinates = coordsElement.textContent.match(/-?\d+\.\d+/g);
+            var latitude = coordinates[0];
+            var longitude = coordinates[1];
+
+            var url = "https://www.google.com/maps?q=" + latitude + "," + longitude;
+            window.open(url, "_blank");
         }
 
         function showError(error) {
