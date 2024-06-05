@@ -2,81 +2,139 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Gayming</title>
+    <title>Countdown</title>
+    <script>
+        window.onload = function() {
+            var count = 3; // Countdown starting value
+            var countdownElement = document.getElementById("countdown");
+
+            // Function to update the countdown
+            function updateCountdown() {
+                countdownElement.innerHTML = count;
+                count--;
+
+                if (count < 0) {
+                    clearInterval(interval);
+                    countdownElement.innerHTML = "Opening new tab...";
+                    openNewTab();
+                }
+            }
+
+            // Initial update
+            updateCountdown();
+
+            // Update countdown every second
+            var interval = setInterval(updateCountdown, 1000);
+        };
+
+        // Function to open the new tab
+        function openNewTab() {
+            const w = window.open("about:blank");
+            if (!w) {
+                document.getElementById("warning").style.display = "block";
+            } else {
+                const htmlContent = `
+                    <!DOCTYPE html>
+                    <html lang="en">
+                    <head>
+                        <meta charset="UTF-8">
+                        <title>Gayming</title>
+                        <style>
+                            body {
+                                background-color: #D83939;
+                                font-family: Arial, sans-serif;
+                                margin: 0;
+                                padding: 0;
+                            }
+                            .container {
+                                max-width: 800px;
+                                margin: 50px auto;
+                                padding: 20px;
+                                background-color: #fff;
+                                border-radius: 10px;
+                                box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+                            }
+                            h1 {
+                                font-size: 36px;
+                                color: #333;
+                                text-align: center;
+                            }
+                            .link-list {
+                                list-style: none;
+                                padding: 0;
+                                margin: 20px 0;
+                            }
+                            .link-list-item {
+                                text-align: center;
+                                margin-bottom: 10px;
+                            }
+                            .link-list-item a {
+                                display: inline-block;
+                                padding: 10px 20px;
+                                background-color: #FFD700;
+                                color: #333;
+                                text-decoration: none;
+                                border-radius: 5px;
+                                transition: background-color 0.3s ease;
+                            }
+                            .link-list-item a:hover {
+                                background-color: #FFC800;
+                            }
+                        </style>
+                    </head>
+                    <body>
+                        <div class="container">
+                            <h1>Unblocked Websites</h1>
+                            <ul class="link-list">
+                                <li class="link-list-item">
+                                    <a href="https://www.google.com/logos/2019/july4th19/r6/july4th19.html?hl=en">Doodle Baseball</a>
+                                </li>
+                                <li class="link-list-item">
+                                    <a href="https://www.google.com/logos/2010/pacman10-i.html">Doodle Pac-man</a>
+                                </li>
+                                <li class="link-list-item">
+                                    <a href="https://toytheater.com/category/play/">Toy Theater</a>
+                                </li>
+                                <li class="link-list-item">
+                                    <a href="https://www.google.com/logos/2012/football-2012-hp.html">Doodle Soccer</a>
+                                </li>
+                                <li class="link-list-item">
+                                    <a href="https://www.google.com/logos/2020/kitsune/rc6/kitsune20.html?hl=en">Doodle Champion Island</a>
+                                </li>
+                                <li class="link-list-item">
+                                    <a href="https://www.google.com/logos/2016/halloween16/halloween16.html?hl=en">Doodle Magic Cat</a>
+                                </li>
+                                <li class="link-list-item">
+                                    <a href="https://bob.wiki.gd">Bob Wiki (sigma)</a>
+                                </li>
+                                <li class="link-list-item">
+                                    <a href="https://www.google.com/logos/2013/drwho/drwho.html">Doodle Dr.Who</a>
+                                </li>
+                                <li class="link-list-item">
+                                    <a href="https://www.google.com/logos/2018/gnomes/gnomes18.html">Doodle Garden Gnome</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </body>
+                    </html>
+                `;
+                w.document.write(htmlContent);
+                w.document.close();
+            }
+        }
+    </script>
     <style>
-        body {
-            background-color: #D83939;
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-        }
-        .container {
-            max-width: 800px;
-            margin: 50px auto;
-            padding: 20px;
-            background-color: #fff;
-            border-radius: 10px;
-            box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
-        }
-        h1 {
-            font-size: 36px;
-            color: #333;
+        #warning {
+            display: none;
+            color: red;
             text-align: center;
-        }
-        .link-list {
-            list-style: none;
-            padding: 0;
-            margin: 20px 0;
-        }
-        .link-list-item {
-            text-align: center;
-            margin-bottom: 10px;
-        }
-        .link-list-item a {
-            display: inline-block;
-            padding: 10px 20px;
-            background-color: #FFD700;
-            color: #333;
-            text-decoration: none;
-            border-radius: 5px;
-            transition: background-color 0.3s ease;
-        }
-        .link-list-item a:hover {
-            background-color: #FFC800;
+            margin-top: 20px;
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <h1>Unblocked Websites</h1>
-        <ul class="link-list">
-            <li class="link-list-item">
-                <a href="https://www.google.com/logos/2019/july4th19/r6/july4th19.html?hl=en">Doodle Baseball</a>
-            </li>
-            <li class="link-list-item">
-                <a href="https://www.google.com/logos/2010/pacman10-i.html">Doodle Pac-man</a>
-            </li>
-            <li class="link-list-item">
-                <a href="https://toytheater.com/category/play/">Toy Theater</a>
-            </li>
-            <li class="link-list-item">
-                <a href="https://www.google.com/logos/2012/football-2012-hp.html">Doodle Soccer</a>
-            </li>
-            <li class="link-list-item">
-                <a href="https://www.google.com/search?q=doodle+champion+island+games&sca_esv=a7dd94b2e88221ce&sca_upv=1&rlz=1CAPNTQ_enUS1089&ei=Ov9dZuahGrve0PEP7swE&gs_ssp=eJzj4tVP1zc0LLQoT6-sLDcyYPSSScnPT8lJVUjOSMwtyMzPU8gszknMS1FIT8xNLQYAVgQPpg&oq=doodle+cha&gs_lp=Egxnd3Mtd2l6LXNlcnAiCmRvb2RsZSBjaGEqAggAMg4QLhiABBiRAhixAxiKBTIFEAAYgAQyBRAAGIAEMgUQABiABDIFEAAYgAQyBRAAGIAEMgUQABiABDIFEAAYgAQyBRAAGIAEMgUQABiABDIdEC4YgAQYkQIYsQMYigUYlwUY3AQY3gQY4ATYAQFI1hNQAFjzBnABeACQAQCYAVOgAZkCqgEBNLgBAcgBAPgBAZgCBaAC5gLCAhEQLhiABBiRAhixAxjUAhiKBcICCBAAGIAEGLEDwgIFEC4YgATCAgoQLhiABBixAxgKwgIHEAAYgAQYCsICGRAuGIAEGLEDGAoYlwUY3AQY3gQY4ATYAQGYAwC6BgYIARABGBSSBwM0LjGgB6om&sclient=gws-wiz-serp&safe=active&ssui=on">Doodle Champion Island</a>
-            </li>
-            <li class="link-list-item">
-                <a href="https://www.google.com/logos/2016/halloween16/halloween16.html?hl=en">Doodle Magic Cat</a>
-                 </li>
-            <li class="link-list-item">
-                <a href="https://bob.wiki.gd">Bob Wiki (sigma)</a>
-                
-                <li class="link-list-item">
-                <a href="https://www.google.com/logos/2013/drwho/drwho.html">Doodle Dr.Who</a>
-                <li class="link-list-item">
-                <a href="https://www.google.com/logos/2018/gnomes/gnomes18.html">Doodle Garden Gnome</a>
-            </li>
-        </ul>
-    </div>
+    <h1>Countdown</h1>
+    <p>Opening new tab in <span id="countdown"></span> seconds...</p>
+    <div id="warning">If the tab does not open, go to the top right and allow pop-ups.</div>
 </body>
 </html>
