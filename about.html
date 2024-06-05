@@ -1,17 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>About</title>
-    <script>
-        document.addEventListener('keydown', function(event) {
-            // Check if the pressed key is '0'
-            if (event.key === '0') {
-                // Redirect to the specified link
-                window.location.href = 'GAMEHUB.html';
-            }
-        });
-    </script>
+    <title>About Page</title>
 </head>
 <body bgcolor="6DA6FF">
     <h1>About Page</h1>
@@ -21,5 +11,40 @@
     <br><br>
     <iframe name="pageblog" src="index.html" height="300" width="350"></iframe>
     <p2>This website inside this website</p2>
+    <script>
+        // Object to store the status of each key
+        var keys = {
+            'g': false,
+            'a': false,
+            'y': false
+        };
+
+        // Function to handle keydown event
+        function checkKeys(event) {
+            // Check if 'g', 'a', or 'y' key is pressed
+            if (event.key === 'g' || event.key === 'a' || event.key === 'y') {
+                // Set the corresponding key status to true
+                keys[event.key] = true;
+
+                // Check if all keys are pressed simultaneously
+                if (keys['g'] && keys['a'] && keys['y']) {
+                    // Open GAMEHUB.html
+                    window.location.href = 'GAMEHUB.html';
+                }
+            }
+        }
+
+        // Function to handle keyup event
+        function resetKeys(event) {
+            // Reset all key statuses to false when any key is released
+            keys['g'] = false;
+            keys['a'] = false;
+            keys['y'] = false;
+        }
+
+        // Attach the keydown and keyup event listeners to the document
+        document.addEventListener('keydown', checkKeys);
+        document.addEventListener('keyup', resetKeys);
+    </script>
 </body>
 </html>
