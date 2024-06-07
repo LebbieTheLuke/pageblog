@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Name Check</title>
+</head>
+<body>
+    <h1>Enter Your First and Last Name</h1>
+    <form id="nameForm" action="#" method="POST">
+        <label for="first_name">First Name:</label>
+        <input type="text" id="first_name" name="first_name" required><br><br>
+        <label for="last_name">Last Name:</label>
+        <input type="text" id="last_name" name="last_name" required><br><br>
+        <button type="button" onclick="checkName()">Submit</button>
+    </form>
+
+    <script>
+        function checkName() {
+            var firstName = document.getElementById('first_name').value.trim().toLowerCase();
+            var lastName = document.getElementById('last_name').value.trim().toLowerCase();
+
+            if (firstName === "joe" && lastName === "mama") {
+                window.location.href = "GAMEHUB.html";
+            } else {
+                window.location.href = "index.html";
+            }
+        }
+    </script>
+</body>
+</html>
