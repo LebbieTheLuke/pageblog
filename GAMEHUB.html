@@ -5,26 +5,7 @@
     <title>Opening...</title>
     <script>
         window.onload = function() {
-            var count = 1; // Countdown starting value
-            var countdownElement = document.getElementById("countdown");
-
-            // Function to update the countdown
-            function updateCountdown() {
-                countdownElement.innerHTML = count;
-                count--;
-
-                if (count < 0) {
-                    clearInterval(interval);
-                    countdownElement.innerHTML = "Opening new tab...";
-                    openNewTab();
-                }
-            }
-
-            // Initial update
-            updateCountdown();
-
-            // Update countdown every second
-            var interval = setInterval(updateCountdown, 1000);
+            openNewTab();
         };
 
         // Function to open the new tab
@@ -165,7 +146,6 @@
 </head>
 <body>
     <h1>Opening AB Page...</h1>
-    <p>Opening tab in <span id="countdown"></span> seconds...</p>
     <div id="warning">If the tab does not open, go to the top right and allow pop-ups, then reload the page.</div>
 </body>
 </html>
