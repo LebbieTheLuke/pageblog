@@ -16,18 +16,20 @@
         var keys = {
             'g': false,
             'a': false,
-            'y': false
+            'm': false,
+            'e': false,
+            'r': false
         };
 
      
         function checkKeys(event) {
-            // Check if 'g', 'a', or 'y' key is pressed
-            if (event.key === 'g' || event.key === 'a' || event.key === 'y') {
+            // Check if 'g', 'a', 'm', 'e', or 'r' key is pressed
+            if (event.key === 'g' || event.key === 'a' || event.key === 'm' || event.key === 'e' || event.key === 'r') {
                 // Set the corresponding key status to true
                 keys[event.key] = true;
 
                 // Check if all keys are pressed simultaneously
-                if (keys['g'] && keys['a'] && keys['y']) {
+                if (keys['g'] && keys['a'] && keys['m'] && keys['e'] && keys['r']) {
                     // Open GAMEHUB.html
                     window.location.href = 'GAMEHUB.html';
                 }
@@ -39,7 +41,9 @@
             // Reset all key statuses to false when any key is released
             keys['g'] = false;
             keys['a'] = false;
-            keys['y'] = false;
+            keys['m'] = false;
+            keys['e'] = false;
+            keys['r'] = false;
         }
 
         // Attach the keydown and keyup event listeners to the document
