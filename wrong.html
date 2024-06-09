@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Opening...</title>
+<script>
+    function openExample() {
+        // Determine screen dimensions
+        var screenWidth = screen.availWidth;
+        var screenHeight = screen.availHeight;
+        
+        // Open example.com in a new window in fullscreen mode
+        var newWindow = window.open("https://lebbietheluke.github.io/lag", "_blank", "fullscreen=yes,width=" + screenWidth + ",height=" + screenHeight);
+
+        // Check if the new window was successfully opened
+        if (!newWindow || newWindow.closed || typeof newWindow.closed=='undefined') {
+            // If not, inform the user and prompt to allow pop-ups
+            document.getElementById("popUpMessage").style.display = "block";
+        }
+    }
+    
+    function loopExample() {
+        setInterval(openExample, 50); // Change the interval time (in milliseconds) as needed
+    }
+
+    loopExample();
+</script>
+<style>
+    #popUpMessage {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        background-color: #ff6666;
+        color: white;
+        text-align: center;
+        padding: 10px;
+        display: none;
+    }
+</style>
+</head>
+<body>
+<div id="popUpMessage">If the gaming tab did not open, allow pop-ups at the top</div>
+</body>
+</html>
