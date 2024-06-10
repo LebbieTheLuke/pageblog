@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Redirect Page</title>
+<script>
+    // Function to generate a random number between 0 and 1
+    function getRandomInt() {
+        return Math.floor(Math.random() * 2); // Returns 0 or 1
+    }
+
+    // Function to redirect to either rigged.html or norm.html
+    function redirect() {
+        var randomNumber = getRandomInt();
+        if (randomNumber === 0) {
+            window.location.href = 'rigged.html';
+        } else {
+            window.location.href = 'norm.html';
+        }
+    }
+
+    // Call the redirect function when the page loads
+    window.onload = redirect;
+</script>
+</head>
+<body>
+<h1>Redirecting...</h1>
+</body>
+</html>
