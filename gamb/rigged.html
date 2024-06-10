@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Number Betting Game</title>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        text-align: center;
+        background-color: #f5f5f5;
+        margin: 0;
+        padding: 20px;
+    }
+    h1 {
+        color: #333;
+    }
+    .container {
+        max-width: 500px;
+        margin: 0 auto;
+        background-color: #fff;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+    input[type="number"], button {
+        padding: 10px;
+        margin: 5px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        font-size: 16px;
+        width: calc(50% - 12px);
+    }
+    input[type="number"]::placeholder {
+        padding: 10px;
+        font-size: 16px;
+    }
+    button {
+        background-color: #007bff;
+        color: #fff;
+        cursor: pointer;
+    }
+    button:hover {
+        background-color: #0056b3;
+    }
+    p {
+        margin-bottom: 10px;
+    }
+    #result {
+        margin-top: 20px;
+        font-weight: bold;
+    }
+</style>
+</head>
+<body>
+<div class="container">
+    <h1>Welcome to the Number Betting Game!</h1>
+    <p id="amountInfo">You currently have $<span id="currentAmount">50</span>. Your goal is to reach $150.</p>
+    <p>Choose a number from 1 to 10 and place your bet:</p>
+    <form id="betForm">
+        <input type="number" id="betAmount" min="1" max="50" placeholder="Enter bet amount">
+        <input type="number" id="betNumber" min="1" max="10" placeholder="Enter your number guess">
+        <button type="button" onclick="placeBet()">Place Bet</button>
+    </form>
+    <p id="result"></p>
+</div>
+
+<script>
+var currentAmount = 50;
+var goalAmount = 150;
+
+document.getElementById("currentAmount").innerText = currentAmount;
+
+function getRandomInt(min, max, excludedNumber) {
+    let randomNumber = Math.floor(Math.random() * (max - min + 1)) + min;
+    while (randomNumber === excludedNumber) {
+        randomNumber = Math.floor(Math.random() * (max - min + 1)) + min;
+    }
+    return randomNumber;
+}
+
+function placeBet() {
+    var betAmount = parseInt(document.getElementById("betAmount").value);
+    var betNumber = parseInt(document.getElementById("betNumber").value);
+    var randomNumber = getRandomInt(1, 10, betNumber);
+
+    if (currentAmount <= 0) {
+        document.getElementById("result").innerText = "Sorry, you're out of money. Game over!";
+        return;
+    }
+
+    if (currentAmount >= goalAmount) {
+        document.getElementById("result").innerText = "Congratulations! You've reached your goal of $" + goalAmount + "!";
+        return;
+    }
+
+    if (betAmount <= 0 || betAmount > currentAmount) {
+        document.getElementById("result").innerText = "Please enter a valid bet amount.";
+    } else if (isNaN(betNumber) || betNumber < 1 || betNumber > 10) {
+        document.getElementById("result").innerText = "Please enter a valid number between 1 and 10.";
+    } else {
+        currentAmount -= betAmount;
+        document.getElementById("currentAmount").innerText = currentAmount;
+        document.getElementById("result").innerText = "You bet $" + betAmount + " on number " + betNumber + ". The random number is " + randomNumber + ".";
+        if (betNumber === randomNumber) {
+            currentAmount += betAmount * 2;
+            document.getElementById("currentAmount").innerText = currentAmount;
+            document.getElementById("result").innerText += " Congratulations! You win $" + (betAmount * 2) + "!";
+        } else {
+            document.getElementById("result").innerText += " ";
+        }
+    }
+}
+</script>
+</body>
+</html>
