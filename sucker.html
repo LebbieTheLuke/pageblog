@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>EZ Cheese Sucking Simulator</title>
+  <style>
+    body {
+      background-color: #fffacd;
+      text-align: center;
+      font-family: Arial, sans-serif;
+    }
+    #cheese {
+      width: 200px;
+      height: 200px;
+      background-image: url('https://i5.walmartimages.com/asr/c0e2ff96-0239-4379-89f0-c42406e06887.a9c3bf357a6dd139f38f8db396914681.jpeg');
+      background-size: cover;
+      display: inline-block;
+      margin-top: 50px;
+    }
+  </style>
+</head>
+<body>
+  <h1>EZ Cheese Sucking Simulator</h1>
+  <div id="cheese"></div>
+  <p>Click the EZ Cheese to suck it!</p>
+  <script>
+    document.getElementById('cheese').addEventListener('click', function() {
+      alert('You sucked the EZ Cheese! Yum!');
+    });
+  </script>
+</body>
+</html>
