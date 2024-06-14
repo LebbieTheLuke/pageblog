@@ -59,25 +59,6 @@
     </style>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.0.0/crypto-js.min.js"></script>
     <script>
-        function textToBinary() {
-            var inputText = document.getElementById('textInput').value;
-            var binary = '';
-            for (var i = 0; i < inputText.length; i++) {
-                binary += inputText[i].charCodeAt(0).toString(2) + ' ';
-            }
-            document.getElementById('binaryOutput').value = binary.trim();
-        }
-
-        function binaryToText() {
-            var inputBinary = document.getElementById('binaryInput').value;
-            var text = '';
-            var binaryArray = inputBinary.split(' ');
-            for (var i = 0; i < binaryArray.length; i++) {
-                text += String.fromCharCode(parseInt(binaryArray[i], 2));
-            }
-            document.getElementById('textOutput').value = text;
-        }
-
         function encryptText() {
             var inputText = document.getElementById('textToEncrypt').value;
             var key = document.getElementById('encryptionKey').value;
@@ -139,26 +120,6 @@
 <body>
     <h1>Secret Communication Methods</h1>
     <div class="container">
-        <!-- Text to Binary Converter -->
-        <div class="converter-container">
-            <h2>Text to Binary</h2>
-            <input type="text" id="textInput" placeholder="Enter text here...">
-            <button onclick="textToBinary()">Convert to Binary</button>
-            <div>
-                <input type="text" id="binaryOutput" readonly placeholder="Binary output appears here...">
-                <button onclick="copyToClipboard('binaryOutput')">Copy</button>
-            </div>
-        </div>
-        <!-- Binary to Text Converter -->
-        <div class="converter-container">
-            <h2>Binary to Text</h2>
-            <input type="text" id="binaryInput" placeholder="Enter binary here...">
-            <button onclick="binaryToText()">Convert to Text</button>
-            <div>
-                <input type="text" id="textOutput" readonly placeholder="Text output appears here...">
-                <button onclick="copyToClipboard('textOutput')">Copy</button>
-            </div>
-        </div>
         <!-- Encrypt Text -->
         <div class="converter-container">
             <h2>Encrypt Text</h2>
