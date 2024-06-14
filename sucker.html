@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>EZ Cheese Sucking Simulator</title>
+  <title>Cheese Clicker</title>
   <style>
     body {
       background-color: #fffacd;
@@ -17,18 +17,35 @@
       background-size: cover;
       display: inline-block;
       margin-top: 50px;
+      cursor: pointer;
+    }
+    #score {
+      font-size: 24px;
     }
   </style>
 </head>
 <body>
-  <h1>EZ Cheese Sucking Simulator</h1>
-   <a href="index.html"> <button>back</button></a>
+  <h1>Cheese Clicker</h1>
   <div id="cheese"></div>
-  <p>Click the EZ Cheese to suck it!</p>
+  <p>Click the cheese to suck it!</p>
+  <p id="score">Cheese Sucked: 0</p>
+  <button onclick="resetScore()">Reset Score</button>
   <script>
+    let score = 0;
+
+    function updateScore() {
+      document.getElementById('score').textContent = 'Cheese Sucked: ' + score;
+    }
+
     document.getElementById('cheese').addEventListener('click', function() {
-      alert('You sucked the EZ Cheese! Yum!');
+      score++;
+      updateScore();
     });
+
+    function resetScore() {
+      score = 0;
+      updateScore();
+    }
   </script>
 </body>
 </html>
